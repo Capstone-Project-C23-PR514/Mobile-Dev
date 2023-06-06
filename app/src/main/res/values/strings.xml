@@ -12,4 +12,10 @@
     <string name="address">address</string>
     <string name="desc">Deskripsi</string>
     <string name="status">status</string>
+    <string name="notif">Notification</string>
+    <string name="home">Beranda</string>
+    <string name="info">Panduan</string>
+    <string name="upload">Upload</string>
+    <string name="alert">Pengingat</string>
+    <string name="profile">Profile</string>
 </resources>
