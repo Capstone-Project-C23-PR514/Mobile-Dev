@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">RoadCrackApp</string>
+    <string name="username">USERNAME</string>
+    <string name="email">EMAIL</string>
+    <string name="password">PASSWORD</string>
+    <string name="confirm_password">CONFIRM PASSWORD</string>
+    <string name="signup">Sign Up</string>
+    <string name="login_text">Already have an account?</string>
+    <string name="tv_cliklog">Login</string>
+    <string name="register_text">Don\'t have an account?</string>
+    <string name="tv_clikreg">SignUp</string>
+    <string name="address">address</string>
+    <string name="desc">Deskripsi</string>
+    <string name="status">status</string>
+</resources>
