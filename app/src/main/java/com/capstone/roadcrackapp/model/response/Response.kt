@@ -25,3 +25,7 @@ data class Registered(
 	@field:SerializedName("email")
 	val email: String
 )
+
+
+
+

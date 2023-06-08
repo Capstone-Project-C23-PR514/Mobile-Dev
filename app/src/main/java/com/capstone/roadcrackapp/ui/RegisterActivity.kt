@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -81,7 +82,6 @@ class RegisterActivity : AppCompatActivity() {
                     } catch (e: Exception) {
                         Toast.makeText(this@RegisterActivity, "Register failed", Toast.LENGTH_SHORT)
                             .show()
-
                     }
                 }
             }
@@ -103,11 +103,8 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
                 is Result.Error -> {
-                    Toast.makeText(
-                        this,
-                        "Register failed ${register.errorMessage}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, "Register failed ${register.errorMessage}", Toast.LENGTH_SHORT).show()
+                    Log.d("Register", "Register failed ${register.errorMessage}")
                     binding.progressBar.visibility = View.GONE
                 }
 

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -56,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnSign.setOnClickListener{
             val email = binding.emailET.text.toString()
             val password = binding.passwordEt.text.toString()
-            val ValidPass = password.length >= 2
+            val ValidPass = password.length >= 8
             val ValidEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
             binding.progressBar.visibility = View.VISIBLE
 
@@ -68,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
                     }catch (e: Exception){
                         binding.progressBar.visibility = View.GONE
                         Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT).show()
+                        Log.d("Login", "Login Failed")
                     }
                 }
             }
@@ -91,8 +93,12 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is Result.Error->{
                     Toast.makeText(this, "Login ${login.errorMessage}" , Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
+                    Log.d("Login", "Login ${login.errorMessage}")
                 }
                 is Result.Loading->{
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -102,7 +108,7 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.emailET.text?.trim().toString()
         val password = binding.passwordEt.text?.trim().toString()
         val ValidEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        val ValidPass = password.length >= 2
+        val ValidPass = password.length >= 8
         binding.apply { btnSign.isEnabled = ValidEmail && ValidPass }
     }
 }

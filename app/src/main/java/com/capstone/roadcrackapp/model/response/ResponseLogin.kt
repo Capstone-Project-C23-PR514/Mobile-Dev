@@ -28,3 +28,4 @@ data class Users(
 	@field:SerializedName("email")
 	val email: String
 )
+

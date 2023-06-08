@@ -18,4 +18,6 @@
     <string name="upload">Upload</string>
     <string name="alert">Pengingat</string>
     <string name="profile">Profile</string>
+    <string name="search_here">Search Here</string>
+    <string name="login">Login</string>
 </resources>

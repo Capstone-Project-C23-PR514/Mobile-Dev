@@ -11,7 +11,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("register")
     suspend fun postRegister(
-        @Field("name") name: String,
+        @Field("nama_lengkap") name: String,
         @Field("email") email: String,
         @Field("password") password: String
     ):Response<ResponseRegister>

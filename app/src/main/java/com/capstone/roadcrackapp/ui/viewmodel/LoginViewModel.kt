@@ -12,9 +12,9 @@ class LoginViewModel(private val repository: Repository): ViewModel() {
 
     private val _responseLogin = repository.responseLogin
     val responseLogin: LiveData<Result<Users>> = _responseLogin
-    fun login(username : String, password : String){
+    fun login(email : String, password : String){
         viewModelScope.launch{
-            repository.login(username, password)
+            repository.login(email, password)
         }
 
     }
