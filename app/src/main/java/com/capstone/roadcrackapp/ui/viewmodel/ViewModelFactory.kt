@@ -11,12 +11,12 @@ class ViewModelFactory private constructor(private val repository: Repository) :
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         when {
-//            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
+//            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
 //                return MainViewModel(repository) as T
 //            }
-//            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
-//                return LoginViewModel(repository) as T
-//            }
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                return LoginViewModel(repository) as T
+            }
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
                 return RegisterViewModel(repository) as T
             }

@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                     }catch (e: Exception){
                         binding.progressBar.visibility = View.GONE
                         Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT).show()
-                        Log.d("Login", "Login Failed")
+                        Log.d("Login", "$e")
                     }
                 }
             }

@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             app:navigationIcon="@drawable/ic_back"
-            app:title="Beranda"
+            app:title="Road Crack Apps"
             android:background="@drawable/appbar"
             app:titleTextColor="@color/white"
             app:menu="@menu/menu_option"/>

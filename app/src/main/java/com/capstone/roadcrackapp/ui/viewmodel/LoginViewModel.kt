@@ -16,7 +16,5 @@ class LoginViewModel(private val repository: Repository): ViewModel() {
         viewModelScope.launch{
             repository.login(email, password)
         }
-
     }
-
 }
