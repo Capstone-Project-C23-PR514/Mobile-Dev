@@ -29,7 +29,7 @@ class PasswordCustom: AppCompatEditText {
             }
 
             override fun afterTextChanged(s: Editable) {
-                if (s.length < 8) {
+                if (s.length < 3) {
                     error = "Minimal  karakter"
                 }
             }

@@ -4,25 +4,25 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.capstone.roadcrackapp.model.injection.Injection
-import com.capstone.roadcrackapp.model.viewmodel.Repository
+import com.capstone.roadcrackapp.model.repo.Repository
 
 class ViewModelFactory private constructor(private val repository: Repository) :
     ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         when {
-//            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-//                return MainViewModel(repository) as T
-//            }
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                return HomeViewModel(repository) as T
+            }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 return LoginViewModel(repository) as T
             }
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
                 return RegisterViewModel(repository) as T
             }
-//            modelClass.isAssignableFrom(CreateViewModel::class.java) -> {
-//                return CreateViewModel(repository) as T
-//            }
+            modelClass.isAssignableFrom(UploadViewModel::class.java) -> {
+                return UploadViewModel(repository) as T
+            }
 //            modelClass.isAssignableFrom(MapViewModel::class.java) -> {
 //                return MapViewModel(repository) as T
 //            }

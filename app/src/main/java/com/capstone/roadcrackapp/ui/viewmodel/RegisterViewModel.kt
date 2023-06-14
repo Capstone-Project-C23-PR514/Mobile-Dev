@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.capstone.roadcrackapp.model.ResponseRegister
 import com.capstone.roadcrackapp.model.remote.Result
-import com.capstone.roadcrackapp.model.viewmodel.Repository
+import com.capstone.roadcrackapp.model.repo.Repository
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(private val repository : Repository) : ViewModel() {

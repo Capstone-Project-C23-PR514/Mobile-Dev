@@ -20,4 +20,14 @@
     <string name="profile">Profile</string>
     <string name="search_here">Search Here</string>
     <string name="login">Login</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="tv_media">Media ( Foto / gambar )</string>
+    <string name="btn_media">Kamera</string>
+    <string name="tv_mediaother">File ( video , dll ) (optional)</string>
+    <string name="btn_mediaother">Tambah File</string>
+    <string name="tv_lokasi">Lokasi</string>
+    <string name="tv_desc">Keterangan</string>
+    <string name="tv_Result">Hasil</string>
+    <string name="btn_mediagallery">Galeri</string>
 </resources>

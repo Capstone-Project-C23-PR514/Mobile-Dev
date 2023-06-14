@@ -14,6 +14,7 @@ import com.capstone.roadcrackapp.databinding.ActivityLoginBinding
 import com.capstone.roadcrackapp.ui.viewmodel.LoginViewModel
 import com.capstone.roadcrackapp.ui.viewmodel.ViewModelFactory
 import com.capstone.roadcrackapp.model.remote.Result
+import com.capstone.roadcrackapp.model.sharedpreferences.LogPreferences
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -57,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnSign.setOnClickListener{
             val email = binding.emailET.text.toString()
             val password = binding.passwordEt.text.toString()
-            val ValidPass = password.length >= 8
+            val ValidPass = password.length >= 3
             val ValidEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
             binding.progressBar.visibility = View.VISIBLE
 
@@ -84,8 +85,8 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.responseLogin.observe(this){login->
             when(login){
                 is Result.Success->{
-//                    val loginPref = LogPreferences(this)
-//                    loginPref.setToken(login.data.token)
+                    val loginPref = LogPreferences(this)
+                    loginPref.setToken(login.data.token)
                     Toast.makeText(this,"Login Success",Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, HomeActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -108,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.emailET.text?.trim().toString()
         val password = binding.passwordEt.text?.trim().toString()
         val ValidEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        val ValidPass = password.length >= 8
+        val ValidPass = password.length >= 3
         binding.apply { btnSign.isEnabled = ValidEmail && ValidPass }
     }
 }
