@@ -69,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding.emailEt.text?.trim().toString()
             val password = binding.passwordEt.text?.trim().toString()
             val isValidEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-            val isValidPassword = password.length >= 8
+            val isValidPassword = password.length >= 3
             val isValidName = name.isNotEmpty()
 
             binding.progressBar.visibility = View.VISIBLE
@@ -120,7 +120,7 @@ class RegisterActivity : AppCompatActivity() {
         val email = binding.emailEt.text?.trim().toString()
         val password = binding.passwordEt.text?.trim().toString()
         val isValidEmail = android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
-        val isValidPassword = password.length >= 8
+        val isValidPassword = password.length >= 3
         binding.apply {
             btnSignup.isEnabled = isValidPassword && isValidEmail
         }

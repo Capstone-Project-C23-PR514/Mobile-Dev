@@ -2,6 +2,7 @@ package com.capstone.roadcrackapp.model.response
 
 import com.google.gson.annotations.SerializedName
 
+
 data class ResponseUpload(
 
 	@field:SerializedName("lokasi")

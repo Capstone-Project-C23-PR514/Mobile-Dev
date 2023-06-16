@@ -12,7 +12,7 @@ class UploadViewModel (private val repository: Repository): ViewModel() {
     private val _responseUpload = repository.responseUpload
     val responseUpload : LiveData<Result<ResponseUpload>> = _responseUpload
 
-    suspend fun uploadStory(token:String, judul:String,file: MultipartBody.Part, lokasi:String){
+    suspend fun uploadStory(token:String, judul:RequestBody,file: MultipartBody.Part, lokasi:RequestBody){
         repository.uploadStory(token, judul, file, lokasi)
     }
 

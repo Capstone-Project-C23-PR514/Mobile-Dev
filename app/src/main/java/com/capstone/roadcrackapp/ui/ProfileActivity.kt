@@ -3,10 +3,12 @@ package com.capstone.roadcrackapp.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import com.capstone.roadcrackapp.R
 import com.capstone.roadcrackapp.databinding.ActivityProfileBinding
+import com.capstone.roadcrackapp.model.sharedpreferences.LogPreferences
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -17,8 +19,35 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupBottomNav()
+        supportActionBar?.show()
+        supportActionBar?.title = "Profile"
+        supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.color.color_primary))
 
+        binding.logoutbtn.setOnClickListener {
+            logoutvalidate()
+        }
+
+
+        setupBottomNav()
+    }
+
+    private fun logoutvalidate() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Logout")
+        builder.setMessage("Konfirmasi logout?")
+        builder.setPositiveButton(android.R.string.ok) { _, _ ->
+            logout()
+        }
+        builder.setNegativeButton(android.R.string.cancel) { _, _ ->
+        }
+        builder.show()
+    }
+    private fun logout(){
+        val loginPref = LogPreferences(this)
+        loginPref.clearToken()
+        val intent = Intent(this,LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
     }
 
     private fun setupBottomNav(){

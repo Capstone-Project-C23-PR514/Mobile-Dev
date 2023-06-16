@@ -1,6 +1,8 @@
 package com.capstone.roadcrackapp.model.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class ResponseReport(
 
@@ -11,6 +13,7 @@ data class ResponseReport(
 	val message: String
 )
 
+@Parcelize
 data class ReportsItem(
 
 	@field:SerializedName("createdAt")
@@ -39,4 +42,4 @@ data class ReportsItem(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String
-)
+) : Parcelable

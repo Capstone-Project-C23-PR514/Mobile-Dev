@@ -30,4 +30,8 @@
     <string name="tv_desc">Keterangan</string>
     <string name="tv_Result">Hasil</string>
     <string name="btn_mediagallery">Galeri</string>
+    <string name="tv_title">Judul Report</string>
+    <string name="tv_date">Tanggal</string>
+    <string name="btn_upload">Upload</string>
+    <string name="guide">Panduan Penggunaan</string>
 </resources>

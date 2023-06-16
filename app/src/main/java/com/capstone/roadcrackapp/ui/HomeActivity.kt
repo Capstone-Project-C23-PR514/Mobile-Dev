@@ -36,6 +36,9 @@ class HomeActivity : AppCompatActivity() {
         val prefLogin = LogPreferences(this)
         val token = prefLogin.getToken()
 
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        supportActionBar?.hide()
+
         if (token.isNullOrEmpty()) {
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -65,18 +68,18 @@ class HomeActivity : AppCompatActivity() {
 
     private fun initList(listStories: List<ReportsItem>) {
         val ItemAdapter = ItemAdapter(listStories, this, object : ItemAdapter.ReportListener {
-            override fun onItemClicker(story: ReportsItem, ivStory: ImageView, tvName: TextView, tvDescription: TextView, tvDate : TextView) {
-//                val intent = Intent(this@MainActivity, DetailsActivity::class.java)
-//                intent.putExtra("data", story)
-//
-//                val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-//                    this@MainActivity,
-//                    Pair(ivStory, "imageViewStory"),
-//                    Pair(tvName, "nameStory"),
-//                    Pair(tvDate, "dateStory"),
-//                    Pair(tvDescription, "descStory")
-//                )
-//                startActivity(intent, optionsCompat.toBundle())
+            override fun onItemClicker(report: ReportsItem, ivPhoto: ImageView, tvLocation: TextView, tvDesc: TextView, tvDate: TextView) {
+                val intent = Intent(this@HomeActivity, DetailActivity::class.java)
+                intent.putExtra("data", report)
+
+                val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this@HomeActivity,
+                    Pair(ivPhoto, "imageViewReport"),
+                    Pair(tvLocation, "nameReport"),
+                    Pair(tvDate, "dateReport"),
+                    Pair(tvDesc, "descReport")
+                )
+                startActivity(intent, optionsCompat.toBundle())
             }
         })
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

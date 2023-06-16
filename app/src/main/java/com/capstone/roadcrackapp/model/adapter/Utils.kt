@@ -77,21 +77,53 @@ fun uriToFile(selectedImg: Uri, context: Context): File {
     return myFile
 }
 
+//fun reduceFileImage(file: File): File {
+//    val bitmap = BitmapFactory.decodeFile(file.path)
+//
+//    var compressQuality = 100
+//    var streamLength: Int
+//
+//    do {
+//        val bmpStream = ByteArrayOutputStream()
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
+//        val bmpPicByteArray = bmpStream.toByteArray()
+//        streamLength = bmpPicByteArray.size
+//        compressQuality -= 5
+//    } while (streamLength > 1000000)
+//
+//    bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
+//
+//    return file
+//}
+
 fun reduceFileImage(file: File): File {
+    if (file == null ) {
+        throw IllegalArgumentException("File tidak valid.")
+    }
+
+    val targetWidth = 224
+    val targetHeight = 224
+
     val bitmap = BitmapFactory.decodeFile(file.path)
 
-    var compressQuality = 100
-    var streamLength: Int
+    val resizedBitmap = Bitmap.createScaledBitmap(bitmap, targetWidth, targetHeight, false)
 
-    do {
-        val bmpStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
-        val bmpPicByteArray = bmpStream.toByteArray()
-        streamLength = bmpPicByteArray.size
-        compressQuality -= 5
-    } while (streamLength > 1000000)
+    val outputStream: FileOutputStream? = try {
+        FileOutputStream(file)
+    } catch (e: IOException) {
+        e.printStackTrace()
+        throw e
+    }
 
-    bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
+    try {
+        resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        outputStream?.flush()
+    } catch (e: IOException) {
+        e.printStackTrace()
+        throw e
+    } finally {
+        outputStream?.close()
+    }
 
     return file
 }

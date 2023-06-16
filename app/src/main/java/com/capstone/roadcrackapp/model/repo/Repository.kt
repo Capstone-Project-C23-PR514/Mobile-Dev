@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.capstone.roadcrackapp.model.ResponseRegister
 import com.capstone.roadcrackapp.model.network.ApiConfig
+import com.capstone.roadcrackapp.model.network.ApiConfigs
 import com.capstone.roadcrackapp.model.network.ApiService
 import com.capstone.roadcrackapp.model.remote.Result
 import com.capstone.roadcrackapp.model.response.LoginUsers
@@ -78,20 +79,23 @@ class Repository(private val apiService: ApiService, private val context: Contex
         return result
     }
 
-    suspend fun uploadStory(token:String, judul:String,file: MultipartBody.Part, lokasi:String){
+    suspend fun uploadStory(token:String, judul:RequestBody,file: MultipartBody.Part, lokasi:RequestBody){
         _responseUpload.value = Result.Loading
         try {
-            val response = ApiConfig.getApiService().getUpload(token,judul,file,lokasi)
+            val response = ApiConfigs.getApiServices().getUpload(token, judul, file, lokasi)
             if (response.isSuccessful){
                 val result = response.body()
                 if (result!=null){
                     _responseUpload.value = Result.Success(result)
+                    Log.d("debuug", "Success:$response")
                 }
             }else{
                 _responseUpload.value = Result.Error("Error: ${response.code()}")
+                Log.d("debuug", "else$response")
             }
         }catch (e:Exception){
             _responseUpload.value = Result.Error(e.message.toString())
+            Log.d("debuug", "exception${e.message.toString()}")
         }
     }
 

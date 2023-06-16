@@ -31,14 +31,12 @@ interface ApiService {
         @Header("Authorization") token: String
     ): Response<ResponseReport>
 
-
-    @POST("upload")
+    @Multipart
+    @POST("predict")
     suspend fun getUpload(
         @Header("Authorization") token: String,
-        @Field ("judul") judul: String,
+        @Part("judul") judul: RequestBody,
         @Part filePart: MultipartBody.Part,
-        @Field ("lokasi") lokasi: String,
+        @Part("lokasi") lokasi: RequestBody,
     ): Response<ResponseUpload>
-
-
 }

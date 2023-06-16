@@ -53,7 +53,11 @@ class UploadActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        factory = ViewModelFactory.getInstance(this)
+        factory = ViewModelFactory.getInstances(this)
+
+        supportActionBar?.show()
+        supportActionBar?.title = "Upload Report"
+        supportActionBar?.setBackgroundDrawable(ContextCompat.getDrawable(this, R.color.color_primary))
 
         setupBottomNav()
 
@@ -89,6 +93,9 @@ class UploadActivity : AppCompatActivity() {
         binding.btnGallery.setOnClickListener(){
             startGallery()
         }
+//        binding.btnMediaother.setOnClickListener(){
+//            startGallery()
+//        }
         binding.btnUpload.setOnClickListener(){
             uploadImage()
             uploadViewModel.responseUpload.observe(this){result->
@@ -102,6 +109,7 @@ class UploadActivity : AppCompatActivity() {
                     }
                     is Result.Error->{
                         binding.progressBar.visibility = View.GONE
+                        Log.d("Login", "Login ${result.errorMessage}")
                     }
                     is Result.Loading->{
                         binding.progressBar.visibility = View.VISIBLE
@@ -114,12 +122,13 @@ class UploadActivity : AppCompatActivity() {
 
     private fun uploadImage() {
         val loc = binding.edLokasi.text.toString()
-        val judul = binding.edTittle.text.toString()
+        val title = binding.edTittle.text.toString()
 
+        val lokasi = loc.toRequestBody("text/plain".toMediaType())
+        val judul = title.toRequestBody("text/plain".toMediaType())
         val reduceimg = reduceFileImage(getFile as File)
-//        val lokasi = loc.toRequestBody("text/plain".toMediaType())
         val requestImageFile = reduceimg.asRequestBody("image/jpeg".toMediaTypeOrNull())
-        val file : MultipartBody.Part = MultipartBody.Part.createFormData(
+        val imagemultipart : MultipartBody.Part = MultipartBody.Part.createFormData(
             "photo",
             reduceimg.name,
             requestImageFile
@@ -135,7 +144,7 @@ class UploadActivity : AppCompatActivity() {
                 binding.btnUpload.isEnabled  = false
                 Toast.makeText(this@UploadActivity, "Uploading Story...", Toast.LENGTH_SHORT).show()
             }
-            uploadViewModel.uploadStory(token,judul, file,loc)
+            uploadViewModel.uploadStory(token,judul, imagemultipart,lokasi)
 
         }
     }
@@ -155,7 +164,7 @@ class UploadActivity : AppCompatActivity() {
         createCustomTempFile(application).also {
             val photoURI: Uri = FileProvider.getUriForFile(
                 this@UploadActivity,
-                "com.dicoding.mystory.fileprovider",
+                "com.capstone.roadcrackapp",
                 it
             )
             currentPhotoPath = it.absolutePath
