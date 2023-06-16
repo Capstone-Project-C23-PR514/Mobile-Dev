@@ -21,7 +21,7 @@ class ApiConfig {
 
         fun getApiService(): ApiService {
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://api-test-4qeqxjz7lq-et.a.run.app/")
+                .baseUrl("https://backend-api-cqk5st7fhq-et.a.run.app/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
